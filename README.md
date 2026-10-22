@@ -13,14 +13,14 @@ This repo holds independent parts. Each one has its own dependencies, settings, 
 ## Quick start
 Run each part in its own terminal:
 ```bash
-cd backend && pip install -r requirements.txt && uvicorn app.main:app --reload
+cd backend && pip install -r requirements.txt && alembic upgrade head && python seed.py && uvicorn app.main:app --reload
 cd frontend && npm install && npm run dev
 ```
 
 ## Roadmap
 - [x] Phase 1: Backend API
 - [x] Phase 2: React frontend
-- [ ] Phase 3: Auth, migrations, deployment
+- [ ] Phase 3: Auth and migrations done; PostgreSQL and deployment next
 - [ ] Phase 4: Paystub RAG
 - [ ] Phase 5: Evaluation, PII masking, polish
 
