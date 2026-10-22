@@ -141,3 +141,16 @@ input { min-height: 46px; padding: 0 14px; border: 0; border-radius: 18px; backg
   .hero-number { font-size: 48px; }
   .two { grid-template-columns: 1fr; }
 }
+
+.header-right { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.signout { min-height: 48px; background: rgba(255,255,255,0.75); box-shadow: 0 4px 14px rgba(201,114,138,0.12); }
+.demo-banner { background: #FFFFFF; color: var(--rose-deep); border-radius: 20px; padding: 14px 18px; font-weight: 700; box-shadow: var(--shadow); }
+
+.auth-page { display: flex; justify-content: center; }
+.auth-wrap { position: relative; width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 24px; padding-top: 24px; }
+.auth-intro { font-size: 17px; line-height: 1.55; }
+.auth-form { display: flex; flex-direction: column; gap: 14px; }
+.demo-card { background: var(--sage); color: #fff; box-shadow: 0 18px 44px rgba(111,143,107,0.25); }
+.demo-card .muted { color: #fff; }
+.demo-card .btn.primary { background: #fff; color: var(--sage-text); }
+@media (max-width: 560px) { .header-right { width: 100%; } .signout { order: 2; } }
