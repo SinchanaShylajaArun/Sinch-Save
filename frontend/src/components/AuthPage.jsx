@@ -33,7 +33,7 @@ export default function AuthPage({ onSignedIn }) {
       <div className="blob blob-b" aria-hidden="true" />
       <main className="auth-wrap">
         <h1 className="brand">Sinch <span className="amp">&amp;</span> Save</h1>
-        <p className="muted auth-intro">An expense tracker for part-time paychecks. Log what you earn and spend, stay under your weekly caps, and watch your savings jar grow.</p>
+        <p className="muted auth-intro">Personal expense tracker . Log what you earn and spend, stay under your weekly caps, and watch your savings jar grow.</p>
 
         <section className="card demo-card" aria-label="Try the demo">
           <h2>Just looking around?</h2>
