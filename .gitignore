@@ -1,0 +1,5 @@
+# Repo-wide: OS and editor files. Each app has its own .gitignore too.
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
