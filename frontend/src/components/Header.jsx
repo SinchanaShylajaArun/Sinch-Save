@@ -1,12 +1,14 @@
-export default function Header({ months, value, onChange, weekLabel }) {
+export default function Header({ months, value, onChange, weekLabel, user, onSignOut }) {
   return (
     <header className="header">
       <div>
         <h1 className="brand">
           Sinch <span className="amp">&amp;</span> Save
         </h1>
-        <p className="muted">{weekLabel} · you're doing lovely</p>
+        <p className="muted">Hi {user.name} · {weekLabel}</p>
       </div>
+      <div className="header-right">
+      <button type="button" className="btn ghost signout" onClick={onSignOut}>{user.is_demo ? "Leave demo" : "Log out"}</button>
       <div className="month-pick">
         <label htmlFor="monthPick" className="small-label">Showing</label>
         <div className="select-wrap">
@@ -18,6 +20,7 @@ export default function Header({ months, value, onChange, weekLabel }) {
           </select>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
         </div>
+      </div>
       </div>
     </header>
   );

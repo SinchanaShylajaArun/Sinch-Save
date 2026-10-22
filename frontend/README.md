@@ -20,9 +20,10 @@ npm run build
 | File | What it shows |
 |---|---|
 | src/App.jsx | Loads data and passes it to each section |
-| src/api.js | Every backend call in one place |
+| src/api.js | Every backend call, plus the saved login session |
 | src/theme.js | Colors, money formatting, month list |
-| src/components/Header.jsx | Name and month dropdown |
+| src/components/AuthPage.jsx | Log in, create account, try the demo |
+| src/components/Header.jsx | Name, log out and month dropdown |
 | src/components/SafeToSpend.jsx | Weekly cap card |
 | src/components/SummaryCards.jsx | Earned, spent, saved |
 | src/components/TerrariumJar.jsx | Savings jar and goal editing |

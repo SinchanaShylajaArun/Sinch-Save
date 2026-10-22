@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { api } from "./api";
+import { api, session, setUnauthorizedHandler } from "./api";
+import AuthPage from "./components/AuthPage";
 import { currentMonthKey, shortDate, todayISO, trackingMonths } from "./theme";
 import Header from "./components/Header";
 import SafeToSpend from "./components/SafeToSpend";
@@ -19,6 +20,15 @@ function cumulativeUpTo(all, iso) {
 }
 
 export default function App() {
+  const [auth, setAuth] = useState(session.get());
+  const signIn = (s) => { session.set(s); setAuth(s); };
+  const signOut = () => { session.clear(); setAuth(null); };
+  useEffect(() => { setUnauthorizedHandler(signOut); }, []);
+  if (!auth) return <AuthPage onSignedIn={signIn} />;
+  return <Dashboard user={auth.user} onSignOut={signOut} />;
+}
+
+function Dashboard({ user, onSignOut }) {
   const [period, setPeriod] = useState(currentMonthKey(months));
   const [config, setConfig] = useState(null);
   const [report, setReport] = useState(null);
@@ -46,7 +56,7 @@ export default function App() {
       setAll(txs);
       setError("");
     } catch (e) {
-      setError(`Can’t reach the Sinch & Save API. Start the backend with “uvicorn app.main:app --reload”, then refresh. (${e.message})`);
+      setError(e.message === "Failed to fetch" ? "Can’t reach the Sinch & Save API. Start the backend with “uvicorn app.main:app --reload”, then refresh." : e.message);
     }
   }, [period, isYear, config]);
 
@@ -87,7 +97,8 @@ export default function App() {
       <div className="blob blob-b" aria-hidden="true" />
       <div className="blob blob-c" aria-hidden="true" />
       <main className="wrap">
-        <Header months={months} value={period} onChange={setPeriod} weekLabel={weekLabel} />
+        <Header months={months} value={period} onChange={setPeriod} weekLabel={weekLabel} user={user} onSignOut={onSignOut} />
+        {user.is_demo && <div className="demo-banner" role="status">You’re exploring the demo. Feel free to add or delete entries; the sample data resets for the next visitor.</div>}
         {error && <div className="error banner" role="alert">{error}</div>}
         <SafeToSpend week={week} />
         <SummaryCards report={report} week={week} period={periodName} count={periodTx.filter((t) => t.type === "income").length} />
