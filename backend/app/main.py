@@ -2,21 +2,20 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import ALL_CATEGORIES, FIXED_CATEGORIES, WEEKLY_CAPS, settings
-from .database import Base, engine
-from .routers import analytics, goals, transactions
+from .routers import analytics, auth, goals, transactions
 
-# Phase 1 creates tables directly. Alembic migrations come in Phase 3.
-Base.metadata.create_all(bind=engine)
+# Tables are managed by Alembic migrations: run `alembic upgrade head`.
 
-app = FastAPI(title="Sinch & Save API", version="0.1.0")
+app = FastAPI(title="Sinch & Save API", version="0.3.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_origin],
+    allow_origins=[o.strip() for o in settings.frontend_origin.split(",")],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+app.include_router(auth.router)
 app.include_router(transactions.router)
 app.include_router(analytics.router)
 app.include_router(goals.router)

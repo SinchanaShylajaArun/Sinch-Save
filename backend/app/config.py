@@ -8,6 +8,10 @@ class Settings(BaseSettings):
     weekly_cap: float = 80
     savings_goal: float = 4460
     frontend_origin: str = "http://localhost:5173"
+    # Change this in production. Generate one with: python -c "import secrets; print(secrets.token_urlsafe(48))"
+    jwt_secret: str = "dev-only-change-me"
+    jwt_expire_minutes: int = 60 * 24 * 7
+    demo_email: str = "demo@sinchandsave.app"
 
 
 settings = Settings()
